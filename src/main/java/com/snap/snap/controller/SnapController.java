@@ -56,13 +56,11 @@ public ResponseEntity<Object> insertsnap(@RequestPart String snap,
         String imgID = fileService.addFile(image);
         snaps.setWebSnap(imgID);
     }
-//////////////start screenshot////////////
+
     String path= "C://ToolScreenshot//ScreenShot.jpg";
     try {
         Thread.sleep(0);
         Robot robotObj = new Robot();
-        // Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        // Rectangle rectObj= new Rectangle(dim);
         Rectangle rectObj = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
         BufferedImage img = robotObj.createScreenCapture(rectObj);
         ImageIO.write(img, "jpg", new File(path));
@@ -94,8 +92,6 @@ public ResponseEntity<Object> insertsnap(@RequestPart String snap,
     } catch (AWTException | IOException  | InterruptedException ioe) {
         System.out.println(ioe);
     }
-    
-//////////////end screenshot////////////
     
     repository.insert(snaps);
     return new ResponseEntity<>(HttpStatus.CREATED);
